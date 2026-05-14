@@ -16,7 +16,7 @@ MODELS = [
     "roberta-base",
     "distilbert-base-cased",
     "albert-base-v2",
-    "electra-small-discriminator"
+    "google/electra-small-discriminator" 
 ]
 
 # Training Parameters
@@ -26,7 +26,7 @@ TRAINING_ARGS = {
     "per_device_eval_batch_size": 16,
     "num_train_epochs": 3,
     "weight_decay": 0.01,
-    "evaluation_strategy": "epoch",
+    "eval_strategy": "epoch", # Changed from evaluation_strategy
     "save_strategy": "epoch",
     "load_best_model_at_end": True,
 }

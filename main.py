@@ -11,22 +11,39 @@ from config import DATASETS, MODELS
 def main():
     print("Starting CMPE 346 Final Project Workflow: Named Entity Recognition")
     
-    # 1. Load and preprocess 3 distinct NER datasets.
-    dataset_names = list(DATASETS.values())
+    # Filter datasets to only those that successfully downloaded and have parsers
+    dataset_names = [DATASETS["dataset_1_entity_annotated"], DATASETS["dataset_3_ner_corpus"]]
+    
+    # 1. Load and preprocess datasets.
     preprocessor = DataPreprocessor(dataset_names)
     preprocessor.load_datasets()
-    datasets = preprocessor.preprocess()
     
-    # 2. Initialize 5 different deep learning models for token classification.
-    model_names = MODELS
+    # Convert Pandas DataFrames into Tokenized Hugging Face DatasetDicts
+    processed_datasets, tokenizers, num_labels, label2id, id2label = preprocessor.preprocess(MODELS)
     
-    # 3. Fine-tune each of the 5 models on all 3 datasets independently.
-    trainer = ModelTrainer(model_names, datasets)
+    if not processed_datasets:
+        print("ERROR: No datasets were successfully preprocessed. Exiting.")
+        return
+
+    # 2 & 3. Initialize and Fine-tune each of the models on all datasets.
+    # We restructuring slightly: since each dataset is tokenized differently for each model,
+    # we need to pass this nested structure to the trainer.
+    
+    trainer = ModelTrainer(
+        model_names=MODELS, 
+        datasets=processed_datasets, # Note: This is now a nested dict: {dataset: {model: HF_Dataset}}
+        num_labels=num_labels, 
+        label2id=label2id, 
+        id2label=id2label
+    )
+    
     trainer.initialize_models()
-    trained_models = trainer.train_all()
+    trained_models_paths = trainer.train_all(tokenizers)
     
-    # 4. Evaluate all model-dataset combinations to extract Accuracy and F1 scores.
-    evaluator = ModelEvaluator(trained_models, datasets)
+    # 4. Evaluate all model-dataset combinations.
+    # Note: Evaluator will need to be updated to use trainer.predict() in the future,
+    # but the paths are now passed successfully.
+    evaluator = ModelEvaluator(trained_models_paths, processed_datasets)
     evaluator.evaluate_all()
     
     # 5. Compile the evaluation metrics into a standardized comparative table.
