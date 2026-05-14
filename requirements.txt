@@ -1,0 +1,6 @@
+kaggle
+transformers
+scikit-learn
+pandas
+torch
+python-dotenv

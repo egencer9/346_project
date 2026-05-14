@@ -1,0 +1,69 @@
+{
+  "project_metadata": {
+    "course": "CMPE 346 - Natural Language Processing",
+    "assignment": "Final Project",
+    "deadlines": {
+      "submission_datetime": "2026-06-05T12:00:00",
+      "presentation_datetime": "2026-06-05T16:00:00"
+    },
+    "team_size": "2 or 3 members"
+  },
+  "technical_requirements": {
+    "fundamental_task": "Sequence Labeling",
+    "specific_domain": "Named Entity Recognition (NER)",
+    "data_requirements": {
+      "datasets_per_individual": 3,
+      "dataset_type": "NER specific datasets"
+    },
+    "model_requirements": {
+      "total_models_required": 5,
+      "model_types": "Deep learning architectures and pre-trained models"
+    },
+    "evaluation_metrics": [
+      "Accuracy",
+      "F1 Score"
+    ],
+    "dependencies": [
+      "kaggle",
+      "transformers",
+      "scikit-learn",
+      "pandas",
+      "torch",
+      "python-dotenv"
+    ]
+  },
+  "execution_workflow": [
+    "Load and preprocess 3 distinct NER datasets.",
+    "Initialize 5 different deep learning models for token classification.",
+    "Fine-tune each of the 5 models on all 3 datasets independently.",
+    "Evaluate all model-dataset combinations to extract Accuracy and F1 scores.",
+    "Compile the evaluation metrics into a standardized comparative table."
+  ],
+  "deliverables": {
+    "code_submission": {
+      "format": "application/zip",
+      "naming_convention": "[group_id_cmpe346_final].zip",
+      "required_structure": "Clean, well-organized code utilizing classes and separate files. Must include documentation.",
+      "forbidden_items": [
+        "Model weights",
+        "Saved models",
+        "Datasets",
+        "Jupyter Notebooks (.ipynb) with uncompleted code or arbitrary executions",
+        ".env files containing sensitive API keys"
+      ]
+    },
+    "presentation_submission": {
+      "format": "application/pdf",
+      "naming_convention": "[group_id..cmpe346_final presentation].pdf",
+      "max_slides": 20,
+      "max_sentences_per_slide": 2,
+      "max_presentation_duration_minutes": 5
+    }
+  },
+  "changelog": [
+    "2024-05-18: Added financial datasets to config.",
+    "2024-05-18: Migrated to HuggingFace 'evaluate' library instead of standalone 'seqeval' due to installation issues on Python 3.12.",
+    "2024-05-18: Replaced seqeval and evaluate with scikit-learn for metrics due to strict setuptools errors with seqeval in Python 3.12.",
+    "2024-05-18: Switched datasets source to Kaggle. Added python-dotenv for API key management and updated requirements."
+  ]
+}
