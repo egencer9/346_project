@@ -1,0 +1,101 @@
+==== outputs/bert_ai4privacy/test_metrics.json
+{
+  "eval_loss": 0.13546904921531677,
+  "eval_precision": 0.8789237668161435,
+  "eval_recall": 0.8949771689497716,
+  "eval_f1": 0.8868778280542985,
+  "eval_accuracy": 0.9722324723247232,
+  "eval_runtime": 0.7395,
+  "eval_samples_per_second": 405.658,
+  "eval_steps_per_second": 51.383,
+  "epoch": 3.0
+}
+
+==== outputs/bert_pii_external/test_metrics.json
+{
+  "eval_loss": 0.0074369050562381744,
+  "eval_precision": 0.9646756583172769,
+  "eval_recall": 0.9677835051546392,
+  "eval_f1": 0.9662270826632358,
+  "eval_accuracy": 0.9986508650335961,
+  "eval_runtime": 2.1192,
+  "eval_samples_per_second": 141.565,
+  "eval_steps_per_second": 17.932,
+  "epoch": 3.0
+}
+
+==== outputs/distilbert_ai4privacy/test_metrics.json
+{
+  "eval_loss": 0.11780684441328049,
+  "eval_precision": 0.8956916099773242,
+  "eval_recall": 0.9018264840182648,
+  "eval_f1": 0.8987485779294653,
+  "eval_accuracy": 0.9746309963099631,
+  "eval_runtime": 1.0459,
+  "eval_samples_per_second": 286.828,
+  "eval_steps_per_second": 36.332,
+  "epoch": 3.0
+}
+
+==== outputs/distilbert_pii_external/test_metrics.json
+{
+  "eval_loss": 0.007704211864620447,
+  "eval_precision": 0.9533546325878595,
+  "eval_recall": 0.961340206185567,
+  "eval_f1": 0.9573307667629131,
+  "eval_accuracy": 0.9982937410719009,
+  "eval_runtime": 1.8509,
+  "eval_samples_per_second": 162.08,
+  "eval_steps_per_second": 20.53,
+  "epoch": 3.0
+}
+
+==== outputs/lstm_ai4privacy/test_metrics.json
+{
+  "precision": 0.6207627118644068,
+  "recall": 0.6689497716894978,
+  "f1": 0.6439560439560439,
+  "accuracy": 0.9535788381742739
+}
+
+==== outputs/lstm_pii_external/test_metrics.json
+{
+  "precision": 0.7977667493796526,
+  "recall": 0.6921420882669537,
+  "f1": 0.7412103746397694,
+  "accuracy": 0.994985779563008
+}
+
+==== outputs/smoke_distilbert_ai4privacy/test_metrics.json
+{
+  "eval_loss": 0.7799654603004456,
+  "eval_precision": 0.23809523809523808,
+  "eval_recall": 0.3448275862068966,
+  "eval_f1": 0.2816901408450704,
+  "eval_accuracy": 0.7856350526899611,
+  "eval_runtime": 0.7891,
+  "eval_samples_per_second": 126.723,
+  "eval_steps_per_second": 16.474,
+  "epoch": 1.0
+}
+
+==== outputs/t5_ai4privacy/test_metrics.json
+{
+  "eval_loss": 0.2903133034706116,
+  "eval_rougeL": 0.8054733963701708,
+  "eval_runtime": 50.6545,
+  "eval_samples_per_second": 5.922,
+  "eval_steps_per_second": 1.481,
+  "epoch": 2.0
+}
+
+==== outputs/t5_pii_external/test_metrics.json
+{
+  "eval_loss": 0.9409591555595398,
+  "eval_rougeL": 0.4809221731955119,
+  "eval_runtime": 166.6094,
+  "eval_samples_per_second": 1.801,
+  "eval_steps_per_second": 0.45,
+  "epoch": 2.0
+}
+
