@@ -10,23 +10,21 @@ DATASETS = {
     "dataset_3_ner_corpus": "naseralqaydeh/named-entity-recognition-ner-corpus"
 }
 
-# Hugging Face Pre-trained Models
+# Hugging Face Pre-trained Models (2 models for Colab training)
 MODELS = [
     "bert-base-cased",
     "roberta-base",
-    "distilbert-base-cased",
-    "albert-base-v2",
-    "google/electra-small-discriminator" 
 ]
 
-# Training Parameters
+# Training Parameters (realistic hyperparameters for NER)
 TRAINING_ARGS = {
-    "learning_rate": 2e-5,
-    "per_device_train_batch_size": 16,
-    "per_device_eval_batch_size": 16,
-    "num_train_epochs": 3,
+    "learning_rate": 3e-5,
+    "per_device_train_batch_size": 32,
+    "per_device_eval_batch_size": 32,
+    "num_train_epochs": 4,
     "weight_decay": 0.01,
-    "eval_strategy": "epoch", # Changed from evaluation_strategy
+    "warmup_ratio": 0.1,
+    "eval_strategy": "epoch",
     "save_strategy": "epoch",
     "load_best_model_at_end": True,
 }

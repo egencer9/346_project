@@ -69,13 +69,12 @@ class ModelTrainer:
                     per_device_eval_batch_size=TRAINING_ARGS["per_device_eval_batch_size"],
                     num_train_epochs=TRAINING_ARGS["num_train_epochs"],
                     weight_decay=TRAINING_ARGS["weight_decay"],
-                    eval_strategy=TRAINING_ARGS["eval_strategy"], # Fixed deprecation
+                    warmup_ratio=TRAINING_ARGS.get("warmup_ratio", 0.0),
+                    eval_strategy=TRAINING_ARGS["eval_strategy"],
                     save_strategy=TRAINING_ARGS["save_strategy"],
                     load_best_model_at_end=TRAINING_ARGS["load_best_model_at_end"],
                     seed=RANDOM_SEED,
                     push_to_hub=False,
-                    # Optional: limit steps for quick testing
-                    max_steps=10 # Setting to 10 for quick testing as requested
                 )
 
                 # Initialize Trainer

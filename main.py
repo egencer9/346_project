@@ -11,8 +11,8 @@ from config import DATASETS, MODELS
 def main():
     print("Starting CMPE 346 Final Project Workflow: Named Entity Recognition")
     
-    # Filter datasets to only those that successfully downloaded and have parsers
-    dataset_names = [DATASETS["dataset_1_entity_annotated"], DATASETS["dataset_3_ner_corpus"]]
+    # Use 1 dataset for training
+    dataset_names = [DATASETS["dataset_1_entity_annotated"]]
     
     # 1. Load and preprocess datasets.
     preprocessor = DataPreprocessor(dataset_names)

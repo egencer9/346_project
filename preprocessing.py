@@ -52,29 +52,24 @@ class DataPreprocessor:
                     # Naseralqaydeh NER Corpus
                     csv_path = os.path.join(dataset_path, "ner.csv")
                     if os.path.exists(csv_path):
+                        import ast
                         df = pd.read_csv(csv_path, encoding="latin1")
-                        df = df.ffill()
+                        df = df.dropna(subset=["Sentence", "Tag"])
                         
-                        # Print columns to debug if needed
-                        # print(f"Columns for {name}: {df.columns.tolist()}")
-
-                        # This dataset has slightly different column names, usually Sentence #, Word, Tag
-                        sentence_col = next((col for col in df.columns if "sentence" in col.lower()), "Sentence #")
-                        word_col = next((col for col in df.columns if "word" in col.lower() or "token" in col.lower()), "Word")
-                        tag_col = next((col for col in df.columns if "tag" in col.lower() or "label" in col.lower()), "Tag")
-
-                        try:
-                            agg_func = lambda s: [(w, t) for w, t in zip(s[word_col].values.tolist(),
-                                                                         s[tag_col].values.tolist())]
-                            grouped = df.groupby(sentence_col).apply(agg_func).reset_index(drop=True)
-                            
-                            sentences = [[str(s[0]) for s in group] for group in grouped]
-                            tags = [[str(s[1]) for s in group] for group in grouped]
-                            
-                            self.raw_data[name] = {"tokens": sentences, "ner_tags": tags}
-                            print(f"Parsed {name}: {len(sentences)} sentences.")
-                        except KeyError as e:
-                             print(f"KeyError in parsing {name}. Columns found: {df.columns.tolist()}. Error: {e}")
+                        sentences = []
+                        tags = []
+                        for _, row in df.iterrows():
+                            try:
+                                t_list = [str(w) for w in str(row["Sentence"]).split()]
+                                l_list = [str(l) for l in ast.literal_eval(row["Tag"])]
+                                if len(t_list) == len(l_list):
+                                    sentences.append(t_list)
+                                    tags.append(l_list)
+                            except Exception as e:
+                                continue
+                        
+                        self.raw_data[name] = {"tokens": sentences, "ner_tags": tags}
+                        print(f"Parsed {name}: {len(sentences)} sentences.")
 
             except Exception as e:
                 print(f"Error processing dataset {name}: {e}")
