@@ -14,6 +14,7 @@ DATASETS = {
 MODELS = [
     "bert-base-cased",
     "roberta-base",
+    "distilbert-base-cased",
 ]
 
 # Training Parameters (realistic hyperparameters for NER)
