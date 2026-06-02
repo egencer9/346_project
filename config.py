@@ -33,3 +33,4 @@ TRAINING_ARGS = {
 # General Configuration
 RANDOM_SEED = 42
 MAX_LENGTH = 128
+DEMO_MODE = False # Set to False for full training

@@ -43,7 +43,7 @@ class DataPreprocessor:
                         grouped = df.groupby("Sentence #").apply(agg_func).reset_index(drop=True)
                         
                         sentences = [[s[0] for s in group] for group in grouped]
-                        tags = [[s[2] for s in group] for group in grouped]
+                        tags = [[s[1] for s in group] for group in grouped]
                         
                         self.raw_data[name] = {"tokens": sentences, "ner_tags": tags}
                         print(f"Parsed {name}: {len(sentences)} sentences.")
@@ -54,14 +54,14 @@ class DataPreprocessor:
                     if os.path.exists(csv_path):
                         import ast
                         df = pd.read_csv(csv_path, encoding="latin1")
-                        df = df.dropna(subset=["Sentence", "Tag"])
+                        df = df.dropna(subset=["Sentence", "POS"])
                         
                         sentences = []
                         tags = []
                         for _, row in df.iterrows():
                             try:
                                 t_list = [str(w) for w in str(row["Sentence"]).split()]
-                                l_list = [str(l) for l in ast.literal_eval(row["Tag"])]
+                                l_list = [str(l) for l in ast.literal_eval(row["POS"])]
                                 if len(t_list) == len(l_list):
                                     sentences.append(t_list)
                                     tags.append(l_list)

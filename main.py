@@ -6,7 +6,7 @@ Orchestrates data preprocessing, model training, and evaluation.
 from preprocessing import DataPreprocessor
 from train_model import ModelTrainer
 from evaluate import ModelEvaluator
-from config import DATASETS, MODELS
+from config import DATASETS, MODELS, DEMO_MODE
 
 def main():
     print("Starting CMPE 346 Final Project Workflow: Named Entity Recognition")
@@ -24,6 +24,15 @@ def main():
     if not processed_datasets:
         print("ERROR: No datasets were successfully preprocessed. Exiting.")
         return
+
+    if DEMO_MODE:
+        print("\n*** DEMO MODE ACTIVE: Truncating datasets for quick testing ***\n")
+        for dataset_name, models_dict in processed_datasets.items():
+            for model_name, dataset in models_dict.items():
+                train_size = min(50, len(dataset['train']))
+                test_size = min(10, len(dataset['test']))
+                processed_datasets[dataset_name][model_name]['train'] = dataset['train'].select(range(train_size))
+                processed_datasets[dataset_name][model_name]['test'] = dataset['test'].select(range(test_size))
 
     # 2 & 3. Initialize and Fine-tune each of the models on all datasets.
     # We restructuring slightly: since each dataset is tokenized differently for each model,
